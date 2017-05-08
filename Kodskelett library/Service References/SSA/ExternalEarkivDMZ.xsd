@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.idainfront.se/schema/archive-2.2" elementFormDefault="qualified" targetNamespace="http://www.idainfront.se/schema/archive-2.2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sg2-test.stockholm.se/Soap/ExternalEarkivDMZ.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/ArchiveTemp" />
+  <xs:element name="ArchiveSip" type="tns:ArchiveSip" />
+  <xs:complexType name="ArchiveSip">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="ArchiveObject" type="tns:ArchiveObject" />
+        </xs:sequence>
+        <xs:attribute name="producer" type="xs:string" />
+        <xs:attribute name="system" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArchiveRequest">
+    <xs:attribute name="callerId" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="GetSipStatus">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="MessageId" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetAip">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RequestedAttributes" type="tns:ArrayOfString1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString1">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Query" type="tns:Query" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SearchRootPath" type="tns:ArrayOfString2" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Query">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SearchCondition" type="tns:SearchCondition" />
+    </xs:sequence>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MAIN" />
+          <xs:enumeration value="ANCESTOR" />
+          <xs:enumeration value="DESCENDANT" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="SearchCondition">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Attribute" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operator" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Operator">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EQUAL" />
+      <xs:enumeration value="NOT_EQUAL" />
+      <xs:enumeration value="MATCHES" />
+      <xs:enumeration value="LESS_OR_EQUAL" />
+      <xs:enumeration value="LESS" />
+      <xs:enumeration value="GREATER_OR_EQUAL" />
+      <xs:enumeration value="GREATER" />
+      <xs:enumeration value="IN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfString2">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Folder" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchAips">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SearchRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Options" type="tns:SearchOptions" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SearchOptions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="RequestedAttributes" type="tns:ArrayOfString1" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SortOrder" type="tns:ArrayOfSortOrderDirective" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Offset" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PageSize" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReturnTotalCount" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSortOrderDirective">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SortOrderDirective" type="tns:SortOrderDirective" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SortOrderDirective">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Attribute" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Order" type="tns:Order" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Order">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ASC" />
+      <xs:enumeration value="DESC" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CountAips">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SearchRequest" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetChildren">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="RequestedAttributes" type="tns:ArrayOfString1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetMetaData">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetSubmissionAgreements">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetFileContent">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="OrderDip">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ArchiveRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="OrderList" type="tns:ArrayOfString" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Customer" type="tns:Customer" />
+        </xs:sequence>
+        <xs:attribute name="deliveryChannel" type="xs:string" />
+        <xs:attribute name="includeFileContent" type="xs:boolean" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItem" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="tns:FullName" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StreetAddress" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CoAddress" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ZipCode" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PostalArea" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Email" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Phone" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Comment" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FullName">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="FirstName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LastName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArchiveObject">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Object">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="StoragePath" type="tns:ArrayOfString2" />
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element minOccurs="0" maxOccurs="1" name="File" type="tns:File" />
+            <xs:element minOccurs="0" maxOccurs="1" name="Document" type="tns:Document" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Object">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DisplayName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ObjectType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="tns:NameValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NameValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="File">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Object">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Content" type="tns:Content" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Content">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Data" type="xs:base64Binary" />
+    </xs:sequence>
+    <xs:attribute name="encoding" type="xs:string" />
+    <xs:attribute name="digest" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Document">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Object">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="tns:File" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ArchiveSipResponse" type="tns:ArchiveSipResponse" />
+  <xs:complexType name="ArchiveSipResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ArchiveTemp" name="ArchiveSipFault" type="q1:FaultDetail" />
+  <xs:element name="ArchiveSipAsynch" type="tns:ArchiveSip" />
+  <xs:element name="ArchiveSipAsynchResponse" type="tns:ArchiveSipAsynchResponse" />
+  <xs:complexType name="ArchiveSipAsynchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="MessageId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetSipStatus" type="tns:GetSipStatus" />
+  <xs:element name="GetSipStatusResponse" type="tns:GetSipStatusResponse" />
+  <xs:complexType name="GetSipStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetSipStatusType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Fault" type="tns:FaultDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="GetSipStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PROCESSING" />
+      <xs:enumeration value="ERROR" />
+      <xs:enumeration value="ARCHIVED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FaultDetail">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="FaultCategory" type="tns:FaultCategory" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FaultCode" type="xs:integer" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FaultCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTERNAL_ERROR" />
+      <xs:enumeration value="META_DATA_ERROR" />
+      <xs:enumeration value="FILE_DATA_ERROR" />
+      <xs:enumeration value="MISSING_TARGET_ERROR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ValidateSipAsynch" type="tns:ArchiveSip" />
+  <xs:element name="ValidateSipAsynchResponse" type="tns:ValidateSipAsynchResponse" />
+  <xs:complexType name="ValidateSipAsynchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="MessageId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchAips" type="tns:SearchAips" />
+  <xs:element name="SearchAipsResponse" type="tns:SearchAipsResponse" />
+  <xs:complexType name="SearchAipsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TotalCount" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArchiveObject" type="tns:ArchiveObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CountAips" type="tns:CountAips" />
+  <xs:element name="CountAipsResponse" type="tns:CountAipsResponse" />
+  <xs:complexType name="CountAipsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetAip" type="tns:GetAip" />
+  <xs:element name="GetAipResponse" type="tns:GetAipResponse" />
+  <xs:complexType name="GetAipResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ArchiveObject" type="tns:ArchiveObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFileContent" type="tns:GetFileContent" />
+  <xs:element name="GetFileContentResponse" type="tns:GetFileContentResponse" />
+  <xs:complexType name="GetFileContentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="File" type="tns:File" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMetaData" type="tns:GetMetaData" />
+  <xs:element name="GetMetaDataResponse" type="tns:GetMetaDataResponse" />
+  <xs:complexType name="GetMetaDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AttributeType" type="tns:AttributeType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectType" type="tns:ObjectType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttributeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="tns:BasicType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DisplayName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PossibleValues" type="tns:ArrayOfString3" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DefaultValues" type="tns:ArrayOfString3" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExternalProperties" type="tns:ArrayOfNameValue" />
+    </xs:sequence>
+    <xs:attribute name="multiValued" type="xs:boolean" />
+    <xs:attribute name="required" type="xs:boolean" />
+    <xs:attribute name="readOnly" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="BasicType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="string" />
+      <xs:enumeration value="date" />
+      <xs:enumeration value="long" />
+      <xs:enumeration value="boolean" />
+      <xs:enumeration value="objref" />
+      <xs:enumeration value="double" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfString3">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfNameValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Property" type="tns:NameValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ObjectType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ArchiveType" type="tns:ArchiveObjectType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DisplayName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attribute" type="tns:AttributeType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PossibleChildren" type="tns:ArrayOfString4" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExternalProperties" type="tns:ArrayOfNameValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ArchiveObjectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="folder" />
+      <xs:enumeration value="spreadtype" />
+      <xs:enumeration value="archiveobject" />
+      <xs:enumeration value="document" />
+      <xs:enumeration value="file" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfString4">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetChildren" type="tns:GetChildren" />
+  <xs:element name="GetChildrenResponse" type="tns:ArrayOfObject" />
+  <xs:complexType name="ArrayOfObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Object" type="tns:Object" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderDip" type="tns:OrderDip" />
+  <xs:element name="OrderDipResponse" type="tns:OrderDipResponse" />
+  <xs:complexType name="OrderDipResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetSubmissionAgreements" type="tns:GetSubmissionAgreements" />
+  <xs:element name="GetSubmissionAgreementsResponse" type="tns:ArrayOfSubmissionAgreement" />
+  <xs:complexType name="ArrayOfSubmissionAgreement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SubmissionAgreement" type="tns:SubmissionAgreement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubmissionAgreement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="System" type="tns:System0" />
+    </xs:sequence>
+    <xs:attribute name="producer" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="System0">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AipConfiguration" type="tns:AipConfiguration" />
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="AipConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ObjectType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StoragePath" type="tns:ArrayOfString2" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StorePolicy" type="tns:StorePolicy" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ManualArchivingAllowed" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="StorePolicy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SupplementsDisallowedDuplicatesAllowed" />
+      <xs:enumeration value="SupplementsDisallowedDuplicatesDisallowed" />
+      <xs:enumeration value="SupplementsAllowed" />
+      <xs:enumeration value="SupplementsAndUpdatesAllowed" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

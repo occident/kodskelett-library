@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.nevatech.com/services/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ExternalEarkivDMZ" targetNamespace="http://schemas.nevatech.com/services/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="Endpoint2_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization">
+        </wsoma:OptimizedMimeSerialization>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="true">
+                </sp:HttpsToken>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="Endpoint4_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization">
+        </wsoma:OptimizedMimeSerialization>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="true">
+                </sp:HttpsToken>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <schema targetNamespace="http://schemas.nevatech.com/services/Imports" xmlns="http://www.w3.org/2001/XMLSchema">
+      <import schemaLocation="http://sg2-test.stockholm.se/Soap/ExternalEarkivDMZ.svc?xsd=xsd0" namespace="http://www.idainfront.se/schema/archive-2.2" />
+      <import schemaLocation="http://sg2-test.stockholm.se/Soap/ExternalEarkivDMZ.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/ArchiveTemp" />
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="IVirtualInterface_ArchiveSip_InputMessage">
+    <wsdl:part xmlns:q1="http://www.idainfront.se/schema/archive-2.2" name="ArchiveSip" element="q1:ArchiveSip" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ArchiveSip_OutputMessage">
+    <wsdl:part xmlns:q2="http://www.idainfront.se/schema/archive-2.2" name="ArchiveSipResponse" element="q2:ArchiveSipResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ArchiveSip_ArchiveSipFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://www.idainfront.se/schema/archive-2.2" name="detail" element="q3:ArchiveSipFault" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ArchiveSipAsynch_InputMessage">
+    <wsdl:part xmlns:q4="http://www.idainfront.se/schema/archive-2.2" name="ArchiveSipAsynch" element="q4:ArchiveSipAsynch" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ArchiveSipAsynch_OutputMessage">
+    <wsdl:part xmlns:q5="http://www.idainfront.se/schema/archive-2.2" name="ArchiveSipAsynchResponse" element="q5:ArchiveSipAsynchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetSipStatus_InputMessage">
+    <wsdl:part xmlns:q6="http://www.idainfront.se/schema/archive-2.2" name="GetSipStatus" element="q6:GetSipStatus" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetSipStatus_OutputMessage">
+    <wsdl:part xmlns:q7="http://www.idainfront.se/schema/archive-2.2" name="GetSipStatusResponse" element="q7:GetSipStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ValidateSipAsynch_InputMessage">
+    <wsdl:part xmlns:q8="http://www.idainfront.se/schema/archive-2.2" name="ValidateSipAsynch" element="q8:ValidateSipAsynch" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_ValidateSipAsynch_OutputMessage">
+    <wsdl:part xmlns:q9="http://www.idainfront.se/schema/archive-2.2" name="ValidateSipAsynchResponse" element="q9:ValidateSipAsynchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_SearchAips_InputMessage">
+    <wsdl:part xmlns:q10="http://www.idainfront.se/schema/archive-2.2" name="SearchAips" element="q10:SearchAips" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_SearchAips_OutputMessage">
+    <wsdl:part xmlns:q11="http://www.idainfront.se/schema/archive-2.2" name="SearchAipsResponse" element="q11:SearchAipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_CountAips_InputMessage">
+    <wsdl:part xmlns:q12="http://www.idainfront.se/schema/archive-2.2" name="CountAips" element="q12:CountAips" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_CountAips_OutputMessage">
+    <wsdl:part xmlns:q13="http://www.idainfront.se/schema/archive-2.2" name="CountAipsResponse" element="q13:CountAipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetAip_InputMessage">
+    <wsdl:part xmlns:q14="http://www.idainfront.se/schema/archive-2.2" name="GetAip" element="q14:GetAip" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetAip_OutputMessage">
+    <wsdl:part xmlns:q15="http://www.idainfront.se/schema/archive-2.2" name="GetAipResponse" element="q15:GetAipResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetFileContent_InputMessage">
+    <wsdl:part xmlns:q16="http://www.idainfront.se/schema/archive-2.2" name="GetFileContent" element="q16:GetFileContent" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetFileContent_OutputMessage">
+    <wsdl:part xmlns:q17="http://www.idainfront.se/schema/archive-2.2" name="GetFileContentResponse" element="q17:GetFileContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetMetaData_InputMessage">
+    <wsdl:part xmlns:q18="http://www.idainfront.se/schema/archive-2.2" name="GetMetaData" element="q18:GetMetaData" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetMetaData_OutputMessage">
+    <wsdl:part xmlns:q19="http://www.idainfront.se/schema/archive-2.2" name="GetMetaDataResponse" element="q19:GetMetaDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetChildren_InputMessage">
+    <wsdl:part xmlns:q20="http://www.idainfront.se/schema/archive-2.2" name="GetChildren" element="q20:GetChildren" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetChildren_OutputMessage">
+    <wsdl:part xmlns:q21="http://www.idainfront.se/schema/archive-2.2" name="GetChildrenResponse" element="q21:GetChildrenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_OrderDip_InputMessage">
+    <wsdl:part xmlns:q22="http://www.idainfront.se/schema/archive-2.2" name="OrderDip" element="q22:OrderDip" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_OrderDip_OutputMessage">
+    <wsdl:part xmlns:q23="http://www.idainfront.se/schema/archive-2.2" name="OrderDipResponse" element="q23:OrderDipResponse" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetSubmissionAgreements_InputMessage">
+    <wsdl:part xmlns:q24="http://www.idainfront.se/schema/archive-2.2" name="GetSubmissionAgreements" element="q24:GetSubmissionAgreements" />
+  </wsdl:message>
+  <wsdl:message name="IVirtualInterface_GetSubmissionAgreements_OutputMessage">
+    <wsdl:part xmlns:q25="http://www.idainfront.se/schema/archive-2.2" name="GetSubmissionAgreementsResponse" element="q25:GetSubmissionAgreementsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IVirtualInterface">
+    <wsdl:operation name="ArchiveSip">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ArchiveSip" message="tns:IVirtualInterface_ArchiveSip_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ArchiveSipResponse" message="tns:IVirtualInterface_ArchiveSip_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ArchiveSip" name="ArchiveSipFault" message="tns:IVirtualInterface_ArchiveSip_ArchiveSipFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveSipAsynch">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ArchiveSipAsynch" message="tns:IVirtualInterface_ArchiveSipAsynch_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ArchiveSipAsynchResponse" message="tns:IVirtualInterface_ArchiveSipAsynch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSipStatus">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetSipStatus" message="tns:IVirtualInterface_GetSipStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetSipStatusResponse" message="tns:IVirtualInterface_GetSipStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSipAsynch">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ValidateSipAsynch" message="tns:IVirtualInterface_ValidateSipAsynch_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/ValidateSipAsynchResponse" message="tns:IVirtualInterface_ValidateSipAsynch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchAips">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/SearchAips" message="tns:IVirtualInterface_SearchAips_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/SearchAipsResponse" message="tns:IVirtualInterface_SearchAips_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CountAips">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/CountAips" message="tns:IVirtualInterface_CountAips_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/CountAipsResponse" message="tns:IVirtualInterface_CountAips_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAip">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetAip" message="tns:IVirtualInterface_GetAip_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetAipResponse" message="tns:IVirtualInterface_GetAip_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileContent">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetFileContent" message="tns:IVirtualInterface_GetFileContent_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetFileContentResponse" message="tns:IVirtualInterface_GetFileContent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMetaData">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetMetaData" message="tns:IVirtualInterface_GetMetaData_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetMetaDataResponse" message="tns:IVirtualInterface_GetMetaData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChildren">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetChildren" message="tns:IVirtualInterface_GetChildren_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetChildrenResponse" message="tns:IVirtualInterface_GetChildren_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderDip">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/OrderDip" message="tns:IVirtualInterface_OrderDip_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/OrderDipResponse" message="tns:IVirtualInterface_OrderDip_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmissionAgreements">
+      <wsdl:input wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetSubmissionAgreements" message="tns:IVirtualInterface_GetSubmissionAgreements_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.idainfront.se/schema/archive-2.2/GetSubmissionAgreementsResponse" message="tns:IVirtualInterface_GetSubmissionAgreements_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Endpoint2" type="tns:IVirtualInterface">
+    <wsp:PolicyReference URI="#Endpoint2_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ArchiveSip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ArchiveSip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ArchiveSipFault">
+        <soap12:fault use="literal" name="ArchiveSipFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveSipAsynch">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ArchiveSipAsynch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSipStatus">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetSipStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSipAsynch">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ValidateSipAsynch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAips">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/SearchAips" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountAips">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/CountAips" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetAip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileContent">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetFileContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetaData">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetMetaData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChildren">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetChildren" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderDip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/OrderDip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmissionAgreements">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetSubmissionAgreements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Endpoint4" type="tns:IVirtualInterface">
+    <wsp:PolicyReference URI="#Endpoint4_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ArchiveSip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ArchiveSip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ArchiveSipFault">
+        <soap12:fault use="literal" name="ArchiveSipFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ArchiveSipAsynch">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ArchiveSipAsynch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSipStatus">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetSipStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSipAsynch">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/ValidateSipAsynch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAips">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/SearchAips" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountAips">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/CountAips" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetAip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileContent">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetFileContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMetaData">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetMetaData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChildren">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetChildren" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderDip">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/OrderDip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubmissionAgreements">
+      <soap12:operation soapAction="http://www.idainfront.se/schema/archive-2.2/GetSubmissionAgreements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExternalEarkivDMZ">
+    <wsdl:port name="Endpoint2" binding="tns:Endpoint2">
+      <soap12:address location="https://apigwpp.stockholm.se/Open/ExternalEarkivDMZ.svc/Soap" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://apigwpp.stockholm.se/Open/ExternalEarkivDMZ.svc/Soap</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="Endpoint4" binding="tns:Endpoint4">
+      <soap12:address location="https://sg2-test.stockholm.se/Soap/ExternalEarkivDMZ.svc/Soap" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://sg2-test.stockholm.se/Soap/ExternalEarkivDMZ.svc/Soap</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

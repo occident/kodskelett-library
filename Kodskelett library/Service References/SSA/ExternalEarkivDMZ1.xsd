@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ArchiveTemp" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ArchiveTemp" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="FaultDetail">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="faultCategoryField" type="tns:FaultCategory" />
+      <xs:element minOccurs="1" maxOccurs="1" name="faultCodeField" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="messageField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FaultCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTERNAL_ERROR" />
+      <xs:enumeration value="META_DATA_ERROR" />
+      <xs:enumeration value="FILE_DATA_ERROR" />
+      <xs:enumeration value="MISSING_TARGET_ERROR" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
